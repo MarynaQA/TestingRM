@@ -1,15 +1,23 @@
 from selenium import selenium
 import unittest, time, re
 
-class Profile_test(unittest.TestCase):
+browser = webdriver.chrome()
+broser.get("http://abo.ua/")
+assert "Интернет магазин гипермаркет Abo.ua. Самый дешевый интернет магазин в Киеве онлайн. Купить в интернет магазине Украины" in browser.title
+
+class Profile_test(object):
+     """docstring for ClassName"""
+     def __init__(self, arg):
+         super(ClassName, self).__init__()
+         self.arg = arg
+          Profile_test(unittest.TestCase):
     def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, "*chrome", "http://abo.ua/")
-        self.selenium.start()
-    
+        self.driver = webdriver.chrome()
+        self.driver.implicity_wait(30)
+        self.base_url = "http://abo.ua"
     def test_profile_test(self):
         sel = self.selenium
-        sel.open("/")
+        sel.open("http://abo.ua")
         self.assertEqual(u"Интернет магазин гипермаркет Abo.ua. Самый дешевый интернет магазин в Киеве онлайн. Купить в интернет магазине Украины", sel.get_title())
         try: self.failUnless(sel.is_element_present("id=pAoVe4sF4xGWKzvRYYhwmw"))
         except AssertionError, e: self.verificationErrors.append(str(e))
@@ -29,7 +37,7 @@ class Profile_test(unittest.TestCase):
         sel.click(u"xpath=(//a[contains(text(),'Одесса')])[2]")
         for i in range(60):
             try:
-                if sel.is_element_present("id=UpdateUserProfile"): break
+                if sel.is_element_present("id=UpdateUserProfile") break
             except: pass
             time.sleep(1)
         else: self.fail("time out")
